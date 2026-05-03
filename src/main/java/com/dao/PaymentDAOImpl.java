@@ -1,15 +1,17 @@
 package com.dao;
 
+import com.interfaces.PaymentDAO;
 import com.model.Payment;
 import com.utilities.DBConnection;
 import java.sql.*;
 
-public class PaymentDAO {
+public class PaymentDAOImpl implements PaymentDAO {
 
+    @Override
     public boolean addPayment(Payment payment) {
         String sql = "INSERT INTO payments (booking_id, amount, payment_method, payment_status, " +
                      "payment_date, transaction_ref) VALUES (?, ?, ?, ?, ?, ?)";
-        
+
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
