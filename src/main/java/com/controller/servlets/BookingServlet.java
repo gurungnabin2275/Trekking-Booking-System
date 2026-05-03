@@ -1,39 +1,74 @@
 package com.controller.servlets;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.dao.BookingDAOImpl;
+import com.interfaces.BookingDAO;
+import com.model.Booking;
+import com.model.User;
 
-/**
- * Servlet implementation class BookingServlet
- */
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
+import java.io.IOException;
+import java.sql.Date;
+import java.util.List;
+
 @WebServlet("/BookingServlet")
 public class BookingServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-    /**
-     * Default constructor. 
-     */
-    public BookingServlet() {
-        // TODO Auto-generated constructor stub
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        // Check login
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("loggedUser") == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
+        User loggedUser = (User) session.getAttribute("loggedUser");
+
+        int    trekId          = Integer.parseInt(request.getParameter("trekId"));
+        String trekStartDate   = request.getParameter("trekStartDate");
+        int    numPersons      = Integer.parseInt(request.getParameter("numPersons"));
+        String specialRequests = request.getParameter("specialRequests");
+
+        Booking booking = new Booking();
+        booking.setUserId(loggedUser.getUserId());
+        booking.setTrekId(trekId);
+        booking.setBookingDate(new Date(System.currentTimeMillis())); // today
+        booking.setTrekStartDate(Date.valueOf(trekStartDate));        // from form
+        booking.setNumPersons(numPersons);
+        booking.setSpecialRequests(specialRequests);
+        booking.setStatus("pending");
+
+        BookingDAO bookingDAO = new BookingDAOImpl();
+        boolean success = bookingDAO.createBooking(booking);
+
+        if (success) {
+            request.setAttribute("success", "Booking submitted! Wait for admin confirmation.");
+            request.getRequestDispatcher("myBookings.jsp").forward(request, response);
+        } else {
+            request.setAttribute("error", "Booking failed. Please try again.");
+            response.sendRedirect("TrekServlet?action=detail&trekId=" + trekId);
+        }
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+        // Show bookings of logged in user
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("loggedUser") == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
 
+        User loggedUser = (User) session.getAttribute("loggedUser");
+        BookingDAO bookingDAO = new BookingDAOImpl();
+        List<Booking> bookings = bookingDAO.getBookingsByUser(loggedUser.getUserId());
+
+        request.setAttribute("bookings", bookings);
+        request.getRequestDispatcher("myBookings.jsp").forward(request, response);
+    }
 }

@@ -1,39 +1,56 @@
 package com.controller.servlets;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.dao.UserDAOImpl;
+import com.interfaces.UserDAO;
+import com.model.User;
 
-/**
- * Servlet implementation class RegisterServlet
- */
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
+import java.io.IOException;
+
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-    /**
-     * Default constructor. 
-     */
-    public RegisterServlet() {
-        // TODO Auto-generated constructor stub
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("register.jsp").forward(request, response);
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+        String name     = request.getParameter("name");
+        String email    = request.getParameter("email");
+        String password = request.getParameter("password");
+        String phone    = request.getParameter("phone");
 
+        UserDAO userDAO = new UserDAOImpl();
+        User existing = userDAO.getUserByEmail(email);
+
+        if (existing != null) {
+            request.setAttribute("error", "Email already registered. Please login.");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+
+        User newUser = new User();
+        newUser.setName(name);
+        newUser.setEmail(email);
+        newUser.setPasswordHash(password);
+        newUser.setPhone(phone);
+        newUser.setRoleId(2);
+        newUser.setApproved(false);
+
+        boolean success = userDAO.registerUser(newUser);
+
+        if (success) {
+            request.setAttribute("success", "Registration successful! Wait for admin approval.");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        } else {
+            request.setAttribute("error", "Registration failed. Please try again.");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+        }
+    }
 }

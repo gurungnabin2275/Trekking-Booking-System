@@ -12,6 +12,7 @@ public class TestConnection {
             }
         } catch (Exception e) {
             System.out.println("FAILED: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
