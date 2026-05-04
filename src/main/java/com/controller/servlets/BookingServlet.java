@@ -1,25 +1,45 @@
 package com.controller.servlets;
 
+import java.io.IOException;
+import java.sql.Date;
+import java.util.List;
+
 import com.dao.BookingDAOImpl;
 import com.interfaces.BookingDAO;
 import com.model.Booking;
 import com.model.User;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
-import java.io.IOException;
-import java.sql.Date;
-import java.util.List;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/BookingServlet")
 public class BookingServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("loggedUser") == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
+        User loggedUser = (User) session.getAttribute("loggedUser");
+        BookingDAO bookingDAO = new BookingDAOImpl();
+        List<Booking> bookings = bookingDAO.getBookingsByUser(loggedUser.getUserId());
+
+        request.setAttribute("bookings", bookings);
+        request.getRequestDispatcher("myBookings.jsp").forward(request, response);
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Check login
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("loggedUser") == null) {
             response.sendRedirect("login.jsp");
@@ -36,8 +56,8 @@ public class BookingServlet extends HttpServlet {
         Booking booking = new Booking();
         booking.setUserId(loggedUser.getUserId());
         booking.setTrekId(trekId);
-        booking.setBookingDate(new Date(System.currentTimeMillis())); // today
-        booking.setTrekStartDate(Date.valueOf(trekStartDate));        // from form
+        booking.setBookingDate(new Date(System.currentTimeMillis()));
+        booking.setTrekStartDate(Date.valueOf(trekStartDate));
         booking.setNumPersons(numPersons);
         booking.setSpecialRequests(specialRequests);
         booking.setStatus("pending");
@@ -46,29 +66,11 @@ public class BookingServlet extends HttpServlet {
         boolean success = bookingDAO.createBooking(booking);
 
         if (success) {
-            request.setAttribute("success", "Booking submitted! Wait for admin confirmation.");
+            request.setAttribute("success", "Booking submitted! Awaiting admin confirmation.");
             request.getRequestDispatcher("myBookings.jsp").forward(request, response);
         } else {
             request.setAttribute("error", "Booking failed. Please try again.");
             response.sendRedirect("TrekServlet?action=detail&trekId=" + trekId);
         }
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        // Show bookings of logged in user
-        HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("loggedUser") == null) {
-            response.sendRedirect("login.jsp");
-            return;
-        }
-
-        User loggedUser = (User) session.getAttribute("loggedUser");
-        BookingDAO bookingDAO = new BookingDAOImpl();
-        List<Booking> bookings = bookingDAO.getBookingsByUser(loggedUser.getUserId());
-
-        request.setAttribute("bookings", bookings);
-        request.getRequestDispatcher("myBookings.jsp").forward(request, response);
     }
 }

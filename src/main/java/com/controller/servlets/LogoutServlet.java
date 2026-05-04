@@ -1,5 +1,7 @@
 package com.controller.servlets;
 
+import com.utilities.SessionUtil;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -11,11 +13,16 @@ public class LogoutServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
-        response.sendRedirect("login.jsp");
+
+        // Clear remember me cookie
+        Cookie cookie = new Cookie("rememberedEmail", "");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+
+        // Destroy session
+        SessionUtil.destroySession(request);
+
+        response.sendRedirect("LoginServlet");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -6,4 +6,6 @@ import java.util.List;
 public interface BookingDAO {
     boolean createBooking(Booking booking);
     List<Booking> getBookingsByUser(int userId);
+    List<Booking> getAllBookings();                        // admin
+    boolean updateBookingStatus(int bookingId, String status); // admin approve/reject
 }
