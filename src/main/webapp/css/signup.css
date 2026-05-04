@@ -1,0 +1,251 @@
+/* Requirement 3: Color Pattern */
+:root {
+    --primary: #0EA5E9;
+    --secondary: #38BDF8;
+    --dark: #1F2937;
+    --light-bg: #F0F9FF;
+    --white: #ffffff;
+    --border-color: #d1d5db;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    color: var(--dark);
+    background-color: var(--light-bg);
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header & Navigation Styles */
+header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--dark);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 0.9rem;
+}
+
+.btn-outline {
+    border: 1px solid var(--border-color);
+    background: transparent;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.auth-links a {
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: bold;
+}
+
+.active-link {
+    color: var(--primary) !important;
+}
+
+nav {
+    background: var(--white);
+    border-top: 1px solid var(--border-color);
+}
+
+.nav-flex {
+    display: flex;
+    align-items: center;
+}
+
+.nav-item {
+    padding: 15px 20px;
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: 500;
+    border-right: 1px solid var(--border-color);
+}
+
+.nav-item:first-child { border-left: 1px solid var(--border-color); }
+
+.nav-item:hover, .nav-item.active {
+    background-color: #f3f4f6;
+}
+
+.nav-spacer {
+    flex-grow: 1;
+}
+
+/* Breadcrumb Styles */
+.breadcrumb-bar {
+    background: var(--white);
+    padding: 10px 0;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.breadcrumb-text {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+/* Form Section Styles */
+.form-section {
+    padding: 40px 0;
+}
+
+.form-container {
+    background: var(--white);
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 40px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input, 
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.flex-1 { flex: 1; }
+
+.form-actions {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btn-submit {
+    background: transparent;
+    border: 1px solid var(--dark);
+    padding: 12px 40px;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    background: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+}
+
+.form-footer-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+.form-footer-link a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+/* Footer Styles */
+footer {
+    background: var(--white);
+    border-top: 1px solid var(--border-color);
+    padding: 40px 0;
+    margin-top: 40px;
+    border-radius: 40px 40px 0 0;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 30px;
+}
+
+.footer-about h3, 
+.footer-social h3, 
+.footer-links h3, 
+.footer-contact h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.footer-about p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+.footer-social a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--dark);
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.footer-social i {
+    width: 20px;
+    margin-right: 10px;
+    color: var(--dark);
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 8px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: var(--dark);
+    font-size: 0.9rem;
+}
+
+.footer-contact p {
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+}

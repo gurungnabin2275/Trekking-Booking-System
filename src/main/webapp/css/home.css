@@ -1,0 +1,302 @@
+/* Color Pattern Definition (Req 3) */
+:root {
+    --primary-color: #0EA5E9; /* Buttons, highlights */
+    --accent-color: #38BDF8;   /* Icons, subtle accent */
+    --text-color: #1F2937;     /* Dark gray/black for all text */
+    --bg-color: #F0F9FF;       /* Very light sky blue for page background */
+    --white: #FFFFFF;
+}
+
+/* Reset and Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+h1, h2, h3, p {
+    margin-top: 0;
+}
+
+/* Common Styles */
+.image-placeholder {
+    background-color: var(--white);
+    border: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #888;
+    overflow: hidden; /* For images */
+}
+
+.package-img, .hero-img, .welcome-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Interactive Details Section (Req 6) */
+.toggle-details {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.details-content {
+    background-color: var(--white);
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.details-content.hidden {
+    display: none;
+}
+
+/* Header & Top Bar */
+header {
+    background-color: var(--white);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.top-bar {
+    padding: 10px 0;
+    font-size: 14px;
+}
+
+.top-bar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 18px;
+    color: var(--primary-color);
+}
+
+.plan-trip, .auth-buttons button {
+    background: transparent;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.contact-info {
+    font-size: 12px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--white);
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    display: block;
+    padding: 15px 10px;
+    font-weight: bold;
+}
+
+nav ul li a.active, nav ul li a:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+/* Hero Section */
+.hero {
+    margin-top: 20px;
+}
+
+.hero-quote {
+    font-style: italic;
+    text-align: center;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.hero-image-placeholder {
+    height: 200px;
+    background-color: var(--white);
+    border: 1px solid #ddd;
+    position: relative;
+}
+
+.breadcrumb {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #888;
+     text-align: center;
+}
+
+/* Services (Boxes with Icons, Req 4) */
+.services {
+    margin-top: 40px;
+}
+
+.services .container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.service-box {
+    background-color: var(--white);
+    border: 1px solid #ccc;
+    width: 30%;
+    padding: 30px;
+    text-align: center;
+}
+
+.service-icon {
+    color: var(--accent-color); /* Icon Color from pattern */
+    margin-bottom: 20px;
+}
+
+.service-box h3 {
+    margin-bottom: 10px;
+}
+
+/* Welcome Section */
+.welcome {
+    margin-top: 40px;
+}
+
+.welcome .container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.welcome-content {
+    width: 50%;
+}
+
+.explore-more-section {
+    margin-top: 20px;
+}
+
+.welcome-images {
+    width: 45%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.welcome-images .image-placeholder {
+    width: 48%;
+    height: 150px;
+}
+
+/* Best Selling & Peak Climbing Grids */
+.best-selling, .peak-climbing {
+    margin-top: 40px;
+}
+
+.package-grid {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.view-all-section {
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.package-card {
+    background-color: var(--white);
+    border: 1px solid #ccc;
+    width: 30%;
+    padding: 15px;
+    text-align: center;
+}
+
+.package-card img {
+    height: 150px;
+    margin-bottom: 15px;
+}
+
+.package-card h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.location-details {
+    font-size: 12px;
+    color: #666;
+}
+
+.price {
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #888;
+    font-weight: normal;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+/* Footer */
+footer {
+    background-color: var(--white);
+    padding: 40px 0;
+    margin-top: 40px;
+    border-top: 1px solid #ddd;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-section {
+    width: 23%;
+    font-size: 14px;
+}
+
+.footer-section h3 {
+    margin-bottom: 15px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    display: block;
+    padding: 5px 0;
+}
+
+.footer-icon {
+    width: 15px;
+    margin-right: 5px;
+}
+
+.useful-links, .social-media {
+    margin-left: 20px;
+}

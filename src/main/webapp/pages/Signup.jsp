@@ -1,0 +1,134 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NepalHikeHub - Create New Account</title>
+    <link rel="stylesheet" href="signup.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header Section (Same as home.html) -->
+    <header>
+        <div class="container top-header">
+            <div class="logo">Nepal Hike Hub</div>
+            <div class="header-right">
+                <button class="btn-outline">Plan Your Trip</button>
+                <span class="contact-email">info@nepalhikehub.com</span>
+                <span class="contact-person">Talk to Men Raj Gurung</span>
+                <div class="auth-links">
+                    <a href="signup.html">Sign up</a> / <a href="signin.html" class="active-link">Sign in</a>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container nav-flex">
+                <a href="home.html" class="nav-item">Home</a>
+                <a href="#" class="nav-item">Trekking in Nepal</a>
+                <a href="#" class="nav-item">Peak Climbing</a>
+                <a href="#" class="nav-item">Booking</a>
+                <div class="nav-spacer"></div>
+                <a href="#" class="nav-item">Blog</a>
+                <a href="#" class="nav-item">About US</a>
+                <a href="#" class="nav-item">Contact US</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb Section -->
+    <div class="breadcrumb-bar">
+        <div class="container">
+            <p class="breadcrumb-text">Home > Sign Up</p>
+        </div>
+    </div>
+
+    <!-- Main Sign Up Form Section -->
+    <section class="form-section">
+        <div class="container">
+            <div class="form-container">
+                <h1 class="form-title">Create New Account</h1>
+                
+                <form action="#">
+                    <div class="form-group">
+                        <label for="fullname">Full name*</label>
+                        <input type="text" id="fullname" placeholder="Full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Your Email*</label>
+                        <input type="email" id="email" placeholder="Full Email" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group flex-1">
+                            <label for="country">Country*</label>
+                            <select id="country" required>
+                                <option value="" disabled selected>Country</option>
+                                <option value="Nepal">Nepal</option>
+                                <option value="USA">USA</option>
+                                <option value="UK">UK</option>
+                                <option value="Australia">Australia</option>
+                            </select>
+                        </div>
+                        <div class="form-group flex-1">
+                            <label for="contact">Contact Number</label>
+                            <input type="text" id="contact" placeholder="Mobile Number">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password*</label>
+                        <input type="password" id="password" placeholder="Password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="re-password">Re-Enter*</label>
+                        <input type="password" id="re-password" placeholder="Re-Enter Password" required>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">Create Account</button>
+                    </div>
+
+                    <p class="form-footer-link">Already have an account? <a href="#">Sign in</a></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section (Same as home.html) -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-about">
+                <h3>NepalHikeHub</h3>
+                <p>Explore breathtaking trails, book your next adventure, and experience the beauty of nature with us. Your journey begins here—trusted guides, seamless booking, and unforgettable memories await in every step you take with our trekking community.</p>
+            </div>
+            <div class="footer-social">
+                <h3>FIND US ON</h3>
+                <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
+                <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="#"><i class="fab fa-youtube"></i> Youtube</a>
+            </div>
+            <div class="footer-links">
+                <h3>Useful Links</h3>
+                <ul>
+                    <li><a href="#">Travel Info</a></li>
+                    <li><a href="#">Booking</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Head office</h3>
+                <p><strong>Address:</strong> Pokhara, Nepal</p>
+                <p><strong>Phone:</strong> +977 9802543291</p>
+                <p><strong>Email:</strong> info@nepalhikehub.com</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -4,6 +4,8 @@ import com.interfaces.UserDAO;
 import com.model.User;
 import com.utilities.DBConnection;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
 
@@ -63,6 +65,7 @@ public class UserDAOImpl implements UserDAO {
         }
         return false;
     }
+
     @Override
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
